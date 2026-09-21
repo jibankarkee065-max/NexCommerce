@@ -12,6 +12,12 @@ import OrderConformation from "./pages/OrderConformation";
 import OrderDetailsPages from "./pages/OrderDetailsPages";
 import MyOrderPage from "./pages/MyOrderPage";
 import Admin from "./assets/image/components/Admin/AdminLayout";
+import AdminHomePage from "./pages/AdminHomePage";
+import UserManagement from "./assets/image/components/Admin/UserManagement";
+import ProductsManagement from "./assets/image/components/Admin/ProductsManagement";
+ import EditProductPage from "./assets/image/components/Admin/EditProductPage";
+import OrderManagement from "./assets/image/components/Admin/OrderManagement";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -31,8 +37,15 @@ const App = () => {
           <Route path="my-orders" element={<MyOrderPage />} />          
         </Route>
         <Route path="admin" element={<Admin/>}>
+
+        <Route index element ={<AdminHomePage/>} />
+        <Route path ="users" element={<UserManagement />} />
+        <Route path ="products" element={<ProductsManagement />} />
+       <Route path="products/:id/edit" element={<EditProductPage />} /> 
+       <Route path ="orders" element = {< OrderManagement/>} />
         
-        {/* admin layout  */}</Route>
+       
+       </Route>
       </Routes>
     </BrowserRouter>
     
