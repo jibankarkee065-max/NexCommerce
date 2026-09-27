@@ -6,6 +6,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/ProductRoutes");
 
 dotenv.config();
 
@@ -14,21 +15,36 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// Test route
+// Home route
 app.get("/", (req, res) => {
     res.send("Server is running");
 });
 
-// MongoDB connection
+const PORT = process.env.PORT || 1200;
+
+// Connect MongoDBcls
+
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
+
         console.log("MongoDB connected successfully");
         console.log("DATABASE NAME:", mongoose.connection.name);
 
+        // User routes
         app.use("/api/user", userRoutes);
+        app.use("/api/products", productRoutes);
 
-        app.listen(process.env.PORT || 12001, () => {
-            console.log(`Server is running on http://localhost:${process.env.PORT || 12001}`);
+
+        // Start server
+        app.listen(PORT, () => {
+            console.log(
+                `Server is running on http://localhost:${PORT}`
+            );
         });
+
     })
-    .catch(error => console.error("MongoDB connection failed:", error));
+    .catch(error => {
+
+        console.error("MongoDB connection failed:", error);
+
+    });
