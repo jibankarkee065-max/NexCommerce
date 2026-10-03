@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const Product = require("./models/product");
 const User = require("./models/User");
 const products = require("./data/products");
+const Cart = require("./models/Cart");
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ const seedData = async () => {
 
         await Product.deleteMany();
         await User.deleteMany();
+        await Cart.deleteMany();
 
         const createdUser = await User.create({
             name: "Admin User",

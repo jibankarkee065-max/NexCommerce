@@ -1,3 +1,4 @@
+
 const dns = require("dns");
 
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
@@ -7,6 +8,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/ProductRoutes");
+const cartRoutes = require("./routes/cartRoute");
 
 dotenv.config();
 
@@ -22,8 +24,7 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 1200;
 
-// Connect MongoDBcls
-
+// Connect MongoDB
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
 
@@ -33,7 +34,7 @@ mongoose.connect(process.env.MONGO_URL)
         // User routes
         app.use("/api/user", userRoutes);
         app.use("/api/products", productRoutes);
-
+        app.use("/api/cart", cartRoutes);
 
         // Start server
         app.listen(PORT, () => {
@@ -48,3 +49,4 @@ mongoose.connect(process.env.MONGO_URL)
         console.error("MongoDB connection failed:", error);
 
     });
+
